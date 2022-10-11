@@ -166,8 +166,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $metodo = "edit";
-        return view('pruebarest', compact('metodo'));
+        $cliente = Cliente::find($id);
+        return view('clienteEdit', compact('cliente'));
     }
 
     /**
@@ -179,8 +179,22 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $metodo = "edit";
-        return view('pruebarest', compact('metodo'));
+
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            'address'=>'required',
+            'phone'=>'required'
+        ]);
+
+        $cliente = Cliente::find($id);
+        $cliente->name = $request->name;
+        $cliente->email = $request->email;
+        $cliente->phone = $request->phone;
+        $cliente->address = $request->address;
+
+        $cliente->save();
+        return redirect('/cliente');
     }
 
     /**
@@ -191,7 +205,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $metodo = "delete";
-        return view('pruebarest', compact('metodo'));
+        $cliente = Cliente::find($id);
+        $cliente->delete();
+        return redirect('/cliente');
     }
 }
