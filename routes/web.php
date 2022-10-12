@@ -22,6 +22,10 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/tailwind', function () {
+    return view('prueba_tailwind');
+});
+
 // Route::post('/recepcion-validacion', [ShopController::class, 'recibe_form']);
 
 // Route::get('/contacto/{codigo?}', [ShopController::class, 'contacto']);
