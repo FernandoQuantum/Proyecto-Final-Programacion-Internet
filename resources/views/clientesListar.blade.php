@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar clientes</title>
-</head>
-<body>
 
+<x-testemplate titulo="Listado de clientes">
+    
     @if(!empty($clientes))
         
-        <h1>Listado de todos los clientes</h1>
-
         <table border="1">
             <tr>
                 <td>ID</td>
@@ -44,9 +35,8 @@
 
         <h1>Listado está vacio</h1>
 
-    @endif
+    @endif 
+
+</x-testemplate>
 
 
-
-</body>
-</html>
