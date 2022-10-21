@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->float('price');
             $table->string('name');
-            $table->string('desc');
+            $table->text('desc');
+            $table->string('prod_picture');//Foto de cada producto
         });
     }
 

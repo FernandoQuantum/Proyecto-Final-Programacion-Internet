@@ -15,11 +15,11 @@ use App\Http\Controllers\ClientController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
-Route::get('/welcome', function () {
-    return view('welcome');
+Route::get('/menu', function () {
+    return view('index');
 });
 
 Route::get('/tailwind', function () {
