@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('desc');
             $table->string('prod_picture');//Foto de cada producto
+            $table->integer('hours'); //En cuantas horas estaría listo el pedido
         });
     }
 

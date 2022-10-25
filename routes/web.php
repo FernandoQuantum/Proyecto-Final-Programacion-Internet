@@ -3,6 +3,8 @@
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +16,7 @@ use App\Http\Controllers\ClientController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -22,8 +24,10 @@ Route::get('/menu', function () {
     return view('index');
 });
 
-Route::get('/tailwind', function () {
-    return view('prueba_tailwind');
+Route::get('/', function () {
+
+    $user = Auth::user();
+    return view('pagina_principal', compact('user'));
 });
 
 // Route::post('/recepcion-validacion', [ShopController::class, 'recibe_form']);

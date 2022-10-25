@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('prod_name');
             $table->string('mode'); //Si es a domicilio o pasan por el a tienda
             $table->boolean('done'); //Si ya se hizo y recogió/llevó el pedido
+            $table->integer('amount'); //Cuantas unidades de este producto se compraron
             $table->timestamps();
         });
     }
