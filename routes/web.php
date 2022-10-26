@@ -3,6 +3,8 @@
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductoController;
+use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -21,13 +23,18 @@ Route::get('/welcome', function () {
 });
 
 Route::get('/menu', function () {
-    return view('index');
+    return view('cliente(solo para consulta)/index');
 });
 
 Route::get('/', function () {
 
     $user = Auth::user();
-    return view('pagina_principal', compact('user'));
+    $productos = Producto::all();
+    return view('pagina_principal', compact('user', 'productos'));
+});
+
+Route::get('/prueba', function(){
+    return view('/productos/pruebaerror');
 });
 
 // Route::post('/recepcion-validacion', [ShopController::class, 'recibe_form']);
@@ -35,6 +42,7 @@ Route::get('/', function () {
 // Route::get('/contacto/{codigo?}', [ShopController::class, 'contacto']);
 
 Route::resource('cliente', ClientController::class);
+Route::resource('producto', ProductoController::class);
 
 Route::middleware([
     'auth:sanctum',

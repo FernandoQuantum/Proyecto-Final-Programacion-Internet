@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Página principal</title>
+    <title>HOLA</title>
     <meta name="description" content="Free open source Tailwind CSS Store template">
     <meta name="keywords" content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
     
@@ -52,30 +52,6 @@
             </div>
 
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
-            <!-- AQUI PONER EL IF DE SI YA ESTÁ DADO DE ALTA UN USUARIO -->
-                @if($user == null)
-                <!-- SI NO HAY NADIE LOGGEADO -->
-                <a href="{{ route('login') }}" class="nav_link inline-block no-underline py-2 px-4">Inicia sesión</a> 
-                @else 
-                    @if($user->type == "admin")
-                    <h1>ERES ADMIN BRO!</h1>
-                    @endif
-                 <div class="max-w-lg mx-auto">
-                    <button class="text-white bg-pink-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">{{$user->name}}<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-                    <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="dropdown">
-                        <ul class="py-1" aria-labelledby="dropdown">
-                        <li>
-                            <a href="{{url('/user/profile')}}" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Perfil</a>
-                        </li>
-                        <li>
-                            <a href="" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Cerrar sesión</a>
-                        </li>
-                        <li>
-                            <a href="{{route('login')}}" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Iniciar sesion</a>
-                        </li>
-                    </div>
-                </div>
-                @endif
 
             <a href="{{ route('register') }}" class="nav_link inline-block no-underline py-2 px-4">Regístrate</a>
 
@@ -176,22 +152,6 @@ Alternatively if you want to just have a single hero
 
         </div>
             </nav>
-
-            @foreach($productos as $producto)
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <div>
-                    <img class="producto hover:grow hover:shadow-lg" src="img/{{$producto->prod_picture}}">
-                    <div class="pt-3 flex items-center justify-between">
-                        <p class="font-bold">{{$producto->name}}</p>
-                        <p class="pt-1 text-green-900 font-bold">${{$producto->price}}</p>
-                    </div>
-                    <p class="text-justify">{{$producto->desc}}</p>
-                </div>
-                <button class="buy self-center">
-                    <i class="fa-solid fa-bag-shopping"></i> Comprar
-                </button>
-            </div>
-            @endforeach  
     </section>
 
     <section id="about" class="bg-white border-b flex flex-col align-center justify-center">

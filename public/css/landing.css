@@ -202,7 +202,7 @@ footer{
     font-size: 30px;
 }
 
-.buy{
+.buy, #add{
     border: 2px solid rgb(57, 170, 57);
     border-radius: 4px;
     width: 120px;
@@ -212,8 +212,23 @@ footer{
     margin-top: 5px;
 }
 
-.buy:hover{
+#add{
+    width: 200px;
+}
+
+.buy:hover, #add:hover{
     border: 2px solid rgb(13, 114, 182);
     color: rgb(13, 114, 182);
+}
 
+.borrar{
+    cursor: pointer;
+    text-align: center;
+    border: 2px solid rgb(121, 7, 7);
+    border-radius: 4px;
+    width: 80px;
+    padding: 3px;
+    color: rgb(172, 16, 16);
+    margin-top: 5px;
+    background-color: white;
 }

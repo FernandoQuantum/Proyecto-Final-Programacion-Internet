@@ -13,6 +13,7 @@ body::after { /*Could also be ::before*/
     background-position: center;
 }
 
+
 h1, #description{
     text-align: center;
     line-height: 30px;

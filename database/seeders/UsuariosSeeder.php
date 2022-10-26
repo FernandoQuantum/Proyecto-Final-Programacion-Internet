@@ -27,8 +27,7 @@ class UsuariosSeeder extends Seeder
         'remember_token' => Str::random(10),
         'created_at' => now(),
         'updated_at' => now()]);
-
-
+        
         User::factory(10)->create();
     }
 }
