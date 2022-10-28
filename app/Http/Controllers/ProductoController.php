@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductoController extends Controller
 {
@@ -64,7 +66,9 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = Auth::user();
+        $producto = Producto::find($id);
+        return view('compras/compraCreate', compact('producto', 'user')); //Aqui ya es una vista de una compra
     }
 
     /**

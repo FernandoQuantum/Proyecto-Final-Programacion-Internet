@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users'); //Para tener acceso a los datos del usuario
             $table->float('total'); //Precio del producto más cargos en caso de a domicilio
             $table->string('prod_name');
-            $table->string('mode'); //Si es a domicilio o pasan por el a tienda
-            $table->boolean('done'); //Si ya se hizo y recogió/llevó el pedido
+            $table->boolean('mode'); //0 es tienda 1 es a domicilio
+            $table->string('status'); //pendiente, hecho y entregado (o sea si el cliente ya lo recibió)
             $table->integer('amount'); //Cuantas unidades de este producto se compraron
             $table->timestamps();
         });

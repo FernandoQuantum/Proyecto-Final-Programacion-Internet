@@ -232,3 +232,56 @@ footer{
     margin-top: 5px;
     background-color: white;
 }
+
+.tiempo{
+    font-weight: 700;
+    color: rgb(173, 77, 21);
+}
+
+#container_compra{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 50%;
+    min-height: 400px;
+}
+
+
+#desc_compra{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+@media (max-width:850px) {
+    #container_compra{
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+    }
+
+    #desc_compra{
+        text-align: center;
+        align-items: center;
+        width: 90%;
+    }
+}
+
+#entrega, #cantidad{
+    border-radius: 4px;
+    height: 35px;
+    font-size: 18px;
+    padding: 5px 10px 5px 10px;
+    width: 250px;
+}
+
+.formulario_compra{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.invisible{
+    display: none;
+}

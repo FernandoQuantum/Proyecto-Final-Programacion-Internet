@@ -63,13 +63,13 @@ return [
     'ipv6' => 'El campo :attribute must be a valid IPv6 address.',
     'json' => 'El campo :attribute must be a valid JSON string.',
     'lt' => [
-        'numeric' => 'El campo :attribute must be less than :value.',
+        'numeric' => 'El campo :attribute debe ser menor a :value.',
         'file' => 'El campo :attribute must be less than :value kilobytes.',
         'string' => 'El campo :attribute must be less than :value caracteres.',
         'array' => 'El campo :attribute must have less than :value items.',
     ],
     'lte' => [
-        'numeric' => 'El campo :attribute must be less than or equal :value.',
+        'numeric' => 'El campo :attribute debe ser menor o igual a :value.',
         'file' => 'El campo :attribute must be less than or equal :value kilobytes.',
         'string' => 'El campo :attribute must be less than or equal :value caracteres.',
         'array' => 'El campo :attribute must not have more than :value items.',

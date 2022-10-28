@@ -6,17 +6,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Página principal</title>
+    <title>Página principal cx</title>
     <meta name="description" content="Free open source Tailwind CSS Store template">
     <meta name="keywords" content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
     <script src="https://kit.fontawesome.com/54b579e7aa.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script>
+    <!-- <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script> -->
 	
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="/css/landingcss.css">
+
+    <style>
+        /* since nested groupes are not supported we have to use 
+            regular css for the nested dropdowns 
+        */
+        li>ul                 { transform: translatex(100%) scale(0) }
+        li:hover>ul           { transform: translatex(101%) scale(1) }
+        li > button svg       { transform: rotate(-90deg) }
+        li:hover > button svg { transform: rotate(-270deg) }
+
+        /* Below styles fake what can be achieved with the tailwind config
+            you need to add the group-hover variant to scale and define your custom
+            min width style.
+            See https://codesandbox.io/s/tailwindcss-multilevel-dropdown-y91j7?file=/index.html
+            for implementation with config file
+        */
+        .group:hover .group-hover\:scale-100 { transform: scale(1) }
+        .group:hover .group-hover\:-rotate-180 { transform: rotate(180deg) }
+        .scale-0 { transform: scale(0) }
+        .min-w-32 { min-width: 8rem }
+    </style>
 
 </head>
 
@@ -56,31 +77,44 @@
                 @if($user == null)
                 <!-- SI NO HAY NADIE LOGGEADO -->
                 <a href="{{ route('login') }}" class="nav_link inline-block no-underline py-2 px-4">Inicia sesión</a> 
+                <a href="{{ route('register') }}" class="nav_link inline-block no-underline py-2 px-4">Regístrate</a>
+
                 @else 
                     @if($user->type == "admin")
                     <h1>ERES ADMIN BRO!</h1>
                     @endif
-                 <div class="max-w-lg mx-auto">
-                    <button class="text-white bg-pink-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">{{$user->name}}<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-                    <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="dropdown">
-                        <ul class="py-1" aria-labelledby="dropdown">
-                        <li>
-                            <a href="{{url('/user/profile')}}" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Perfil</a>
-                        </li>
-                        <li>
-                            <a href="" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Cerrar sesión</a>
-                        </li>
-                        <li>
-                            <a href="{{route('login')}}" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Iniciar sesion</a>
-                        </li>
+                    
+                <div class="group inline-block">
+                    <button
+                        class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-md flex items-center w-30"
+                    >
+                        <span class="pr-1 font-semibold flex-1">{{$user->name}}</span>
+                        <span>
+                        <svg
+                            class="fill-current h-4 w-4 transform group-hover:-rotate-180
+                            transition duration-150 ease-in-out"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            />
+                        </svg>
+                        </span>
+                    </button>
+                    <ul
+                        class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+                    transition duration-150 ease-in-out origin-top min-w-32"
+                    >
+                    <a href="{{url('/user/profile')}}"><li class="rounded-sm px-3 py-1 hover:bg-gray-100">Perfil</li></a>
+                        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Mis compras</li>
+                        <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
+                        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Cerrar sesión</li>
+                    </ul>
                     </div>
-                </div>
-                @endif
-
-            <a href="{{ route('register') }}" class="nav_link inline-block no-underline py-2 px-4">Regístrate</a>
-
 
             </div>
+            @endif
         </div>
     </nav>
 
@@ -185,11 +219,11 @@ Alternatively if you want to just have a single hero
                         <p class="font-bold">{{$producto->name}}</p>
                         <p class="pt-1 text-green-900 font-bold">${{$producto->price}}</p>
                     </div>
-                    <p class="text-justify">{{$producto->desc}}</p>
+                    <p class="text-justify">{{$producto->desc}} <span class="tiempo">Listo en {{$producto->hours}} hora(s)</span></p>
                 </div>
-                <button class="buy self-center">
+                <a class="buy self-center flex justify-center items-center gap-x-2" href="/producto/{{$producto->id}}">
                     <i class="fa-solid fa-bag-shopping"></i> Comprar
-                </button>
+                </a>
             </div>
             @endforeach  
     </section>
@@ -364,7 +398,7 @@ Alternatively if you want to just have a single hero
         <i class="fa-solid fa-phone">3323435467</i>
         <div class="smedia">
             <h2>Siguenos</h2>
-            <a href="https://www.facebook.com/Kokolattegdl"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.facebook.com/Kokolattegdl" target="_blank"><i class="fa-brands fa-facebook"></i></a>
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
 
         </div>
