@@ -48,21 +48,36 @@
             </div>
 
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
-                 <div class="max-w-lg mx-auto">
-                    <button class="text-white bg-pink-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button" data-dropdown-toggle="dropdown">{{$user->name}}<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-                    <div class="hidden bg-white text-base z-50 list-none divide-y divide-gray-100 rounded shadow my-4" id="dropdown">
-                        <ul class="py-1" aria-labelledby="dropdown">
-                        <li>
-                            <a href="{{url('/user/profile')}}" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Perfil</a>
-                        </li>
-                        <li>
-                            <a href="" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Cerrar sesión</a>
-                        </li>
-                        <li>
-                            <a href="{{route('login')}}" class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">Iniciar sesion</a>
-                        </li>
+
+                <div class="group inline-block">
+                    <button
+                        class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-md flex items-center w-30"
+                    >
+                        <span class="pr-1 font-semibold flex-1">{{$user->name}}</span>
+                        <span>
+                        <svg
+                            class="fill-current h-4 w-4 transform group-hover:-rotate-180
+                            transition duration-150 ease-in-out"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                            />
+                        </svg>
+                        </span>
+                    </button>
+                    <ul
+                        class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
+                    transition duration-150 ease-in-out origin-top min-w-32"
+                    >
+                    <a href="{{url('/user/profile')}}"><li class="rounded-sm px-3 py-1 hover:bg-gray-100">Perfil</li></a>
+                        <a href="{{url('/compra')}}"><li class="rounded-sm px-3 py-1 hover:bg-gray-100">Mis compras</li></a>
+                        <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
+                        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Cerrar sesión</li>
+                    </ul>
                     </div>
-                </div>
+
             </div>
         </div>
     </nav>

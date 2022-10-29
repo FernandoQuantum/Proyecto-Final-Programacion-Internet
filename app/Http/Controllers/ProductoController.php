@@ -15,9 +15,10 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $user = Auth::user();
         $productos = Producto::all();
-        return view('productos/productosIndex', compact('productos'));
+        return view('productos/productosIndex', compact('productos', 'user'));
 
     }
 

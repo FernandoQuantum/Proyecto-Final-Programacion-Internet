@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles1.css">
+    <link rel="stylesheet" href="/css/formEditProducto.css">
     
     <style>
 
@@ -54,7 +54,7 @@
         </div>
         @endif
         
-        <img src="/img/{{$producto->prod_picture}}" alt="Donde está la imagen??">
+        <img class ="self-center" src="/img/{{$producto->prod_picture}}" alt="Donde está la imagen??">
 
         <label class="mt-5" for="picture">Seleccione imagen</label>
         <input id = "picture" type="file" name="prod_picture" required>

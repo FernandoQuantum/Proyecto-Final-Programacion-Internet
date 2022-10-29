@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +12,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
     <script src="https://kit.fontawesome.com/54b579e7aa.js" crossorigin="anonymous"></script>
-    <!-- <script src="https://unpkg.com/@themesberg/flowbite@latest/dist/flowbite.bundle.js"></script> -->
 	
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/landingcss.css">
@@ -107,13 +105,12 @@
                     transition duration-150 ease-in-out origin-top min-w-32"
                     >
                     <a href="{{url('/user/profile')}}"><li class="rounded-sm px-3 py-1 hover:bg-gray-100">Perfil</li></a>
-                        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Mis compras</li>
+                        <a href="{{url('/compra')}}"><li class="rounded-sm px-3 py-1 hover:bg-gray-100">Mis compras</li></a>
                         <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
                         <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Cerrar sesión</li>
                     </ul>
                     </div>
-
-            </div>
+                </div>
             @endif
         </div>
     </nav>

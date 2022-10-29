@@ -18,8 +18,18 @@ class CompraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $user = Auth::user();
+
+        if($user->type == "cliente"){
+            $compras = User::find($user->id)->compras;            
+            return view('compras/comprasListarCliente', compact('user','compras'));
+        }
+        else if($user->type == "admin"){
+            $compras = Compra::all();
+            return view('compras/comprasListarAdmin', compact('user','compras'));
+        }
+        
     }
 
     /**
@@ -86,7 +96,9 @@ class CompraController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $compra = Compra::find($id);
+        $compra->delete();
+        return redirect("/compra");
     }
 
     
@@ -121,4 +133,6 @@ class CompraController extends Controller
 
         return view('compras/compraConfirmada', compact('producto', 'user', 'total'));
     }
+
+
 }
