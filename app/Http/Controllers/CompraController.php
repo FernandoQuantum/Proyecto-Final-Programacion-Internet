@@ -134,5 +134,20 @@ class CompraController extends Controller
         return view('compras/compraConfirmada', compact('producto', 'user', 'total'));
     }
 
+    public function cambiarStatus($id){
+
+        $compra = Compra::find($id);
+
+        if($compra->status == "pendiente"){
+            $compra->status = "listo";
+        }
+        else if($compra->status == "listo"){
+            $compra->status = "entregado";
+        }
+
+        $compra->save();
+        return redirect('/compra');
+    }
+
 
 }

@@ -21,77 +21,21 @@
 <body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
 
     <!--Nav-->
-    <nav id="header" class="w-full z-30 top-0 py-1 sticky">
-        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
-
-            <label for="menu-toggle" class="cursor-pointer md:hidden block">
-                <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                    <title>menu</title>
-                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-                </svg>
-            </label>
-            <input class="hidden" type="checkbox" id="menu-toggle" />
-
-            <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
-                <nav>
-                    <ul class="md:flex items-center justify-between pt-4 md:pt-0">
-                        <li><a class="nav_link inline-block no-underline py-2 px-4" href="/#store">Tienda</a></li>
-                        <li><a class="nav_link inline-block no-underline py-2 px-4" href="/#about">About</a></li>
-                        <li><a class="nav_link inline-block no-underline py-2 px-4" href="/#contacto">Contacto</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="order-1 md:order-2">
-                <a class="logo-icon flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
-                <i class="fa-solid fa-cookie"></i>
-                    Kokolatte
-                </a>
-            </div>
-
-            <div class="group inline-block">
-                    <button
-                        class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-md flex items-center w-30"
-                    >
-                        <span class="pr-1 font-semibold flex-1">{{$user->name}}</span>
-                        <span>
-                        <svg
-                            class="fill-current h-4 w-4 transform group-hover:-rotate-180
-                            transition duration-150 ease-in-out"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                            />
-                        </svg>
-                        </span>
-                    </button>
-                    <ul
-                        class="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
-                    transition duration-150 ease-in-out origin-top min-w-32"
-                    >
-                    <a href="{{url('/user/profile')}}"><li class="rounded-sm px-3 py-1 hover:bg-gray-100">Perfil</li></a>
-                        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Mis compras</li>
-                        <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
-                        <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Cerrar sesión</li>
-                    </ul>
-            </div>
-        </div>
-    </nav>
+    <x-navBar :user="$user">
+    </x-navBar>
 
     <section class="bg-white">
 
         <div class="container mx-auto flex items-start flex-wrap pt-4 pb-12">
 
-            <nav id="store" class="w-full z-30 top-0 px-6 py-1">
+            <nav class="w-full z-30 top-0 px-6 py-1">
                 <div class="w-full container mx-auto flex flex-wrap items-center justify-center flex-col mt-0 px-2 py-3">
 
                     <a class="titulo_subrayado uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " style="font-size:30px;">
-                    <i class="fa-solid fa-store"></i>
-				Tienda
+                    <i class="fa-solid fa-utensils"></i>
+				Administrar Productos
 			</a>
-            <a href="/producto/create"><button id="add"><i class="fa-solid fa-plus"></i>Agregar platillo</button></a>
+            <a href="/producto/create" class="mt-10"><button id="add"><i class="fa-solid fa-plus"></i>Agregar platillo</button></a>
 
         </div>
         
@@ -108,13 +52,13 @@
                     <p class="text-justify">{{$producto->desc}}</p>
                 </div>
                 <div class="flex self-center gap-x-10">
-                    <a href="/producto/{{$producto->id}}/edit"><button class="buy self-center">
+                    <a href="/producto/{{$producto->id}}/edit"><button class="buy self-center" style="width:70px;">
                         Editar
                     </button></a>
                     <form action = "/producto/{{$producto->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <input class="borrar" type="submit" value="Borrar">
+                        <input class="borrar" type="submit" value="Borrar" style="width: 70px;">
                     </form>
                 </div>
             </div>

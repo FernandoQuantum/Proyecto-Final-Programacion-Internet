@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UserController;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,10 +24,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/menu', function () {
-    return view('cliente(solo para consulta)/index');
-});
-
 Route::get('/', function () {
 
     $user = Auth::user();
@@ -35,16 +32,12 @@ Route::get('/', function () {
 });
 
 
-
-// Route::post('/recepcion-validacion', [ShopController::class, 'recibe_form']);
-
-// Route::get('/contacto/{codigo?}', [ShopController::class, 'contacto']);
-
-Route::resource('cliente', ClientController::class);
 Route::resource('producto', ProductoController::class);
 Route::resource('compra', CompraController::class);
+Route::post('/compra/make/{producto_id}', [CompraController::class, 'makeCompra']);
+Route::get('/usuario/{user_id}', [UserController::class, 'info']);
+Route::get('/status-edit/{compra_id}', [CompraController::class, 'cambiarStatus']);
 
-Route::post('/compra/{producto_id}', [CompraController::class, 'makeCompra']);
 
 Route::middleware([
     'auth:sanctum',
