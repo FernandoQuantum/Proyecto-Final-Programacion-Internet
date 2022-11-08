@@ -45,7 +45,7 @@
                 <form class="formulario_compra" action="/compra/make/{{$producto->id}}" method="POST">
                     @csrf
                     <label for="cantidad">Seleccione la cantidad</label>
-                    <input id="cantidad" name="amount" type="number" required>
+                    <input id="cantidad" name="amount" type="number">
 
                     <label for="entrega">Seleccione modo de entrega</label>
                     <select id="entrega" name="mode" required>

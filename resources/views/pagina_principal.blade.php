@@ -135,7 +135,7 @@
                         <p class="font-bold">{{$producto->name}}</p>
                         <p class="pt-1 text-green-900 font-bold">${{$producto->price}}</p>
                     </div>
-                    <p class="text-justify">{{$producto->desc}} <span class="tiempo">Listo en {{$producto->hours}} hora(s)</span></p>
+                    <p class="text-justify">{{$producto->desc}} <span class="tiempo"><i class="fa-solid fa-clock"></i> {{$producto->hours}} hora(s)</span></p>
                 </div>
                 <a class="buy self-center flex justify-center items-center gap-x-2" href="/producto/{{$producto->id}}">
                     <i class="fa-solid fa-bag-shopping"></i> Comprar
@@ -312,6 +312,7 @@
             <i class="fa-solid fa-cookie"></i>Kokolatte
         </a>
         <i class="fa-solid fa-phone">3323435467</i>
+        <i class="fa-solid fa-clock text-blue-500">Abiertos de L-V de 9am a 8pm</i>
         <div class="smedia">
             <h2>Siguenos</h2>
             <a href="https://www.facebook.com/Kokolattegdl" target="_blank"><i class="fa-brands fa-facebook"></i></a>

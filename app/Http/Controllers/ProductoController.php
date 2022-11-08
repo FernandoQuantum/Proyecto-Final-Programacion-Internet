@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only('show');
+    }
     /**
      * Display a listing of the resource.
      *
