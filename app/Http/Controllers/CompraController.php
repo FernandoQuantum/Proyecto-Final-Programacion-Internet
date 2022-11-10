@@ -8,10 +8,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
+
 
 
 class CompraController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only('index', 'makeCompra', 'cambiarStatus');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +33,10 @@ class CompraController extends Controller
             return view('compras/comprasListarCliente', compact('user','compras'));
         }
         else if($user->type == "admin"){
+
+            if(!Gate::allows('admin-permission')){
+                abort(403,"Debes ser administrador para acceder a este método");
+            }
             $compras = Compra::all();
             return view('compras/comprasListarAdmin', compact('user','compras'));
         }
@@ -135,6 +146,10 @@ class CompraController extends Controller
     }
 
     public function cambiarStatus($id){
+
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Acción solo permitida para administrador");
+        }
 
         $compra = Compra::find($id);
 

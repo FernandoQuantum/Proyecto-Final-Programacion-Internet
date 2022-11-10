@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users'); //Para tener acceso a los datos del usuario
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); //Para tener acceso a los datos del usuario
             $table->float('total'); //Precio del producto más cargos en caso de a domicilio
             $table->string('prod_name');
             $table->boolean('mode'); //0 es tienda 1 es a domicilio

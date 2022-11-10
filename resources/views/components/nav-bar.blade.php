@@ -68,7 +68,12 @@
                     <a href="{{url('/compra')}}"><li class="rounded-sm px-3 py-1 hover:bg-gray-100">Mis compras</li></a>
                     @endif
                     <li class="rounded-sm relative px-3 py-1 hover:bg-gray-100">
-                    <li class="rounded-sm px-3 py-1 hover:bg-gray-100">Cerrar sesión</li>
+                    <li class="rounded-sm px-3 py-1 hover:bg-gray-100">
+                        <form method="POST" action="http://proyecto2.test/logout">
+                            @csrf
+                            <input type="submit" value="Cerrar Sesión" class="cursor-pointer">
+                        </form>
+                    </li>
                     </ul>
                     </div>
                 </div>

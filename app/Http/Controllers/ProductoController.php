@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 
 class ProductoController extends Controller
@@ -21,6 +22,10 @@ class ProductoController extends Controller
      */
     public function index()
     {   
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Debes ser administrador para acceder a este método");
+        }
+
         $user = Auth::user();
         $productos = Producto::all();
         return view('productos/productosIndex', compact('productos', 'user'));
@@ -33,7 +38,11 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Debes ser administrador para acceder a este método");
+        }
+
         return view('productos/productosCreate');
     }
 
@@ -45,6 +54,10 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Debes ser administrador para acceder a este método");
+        }
+
         $request->validate([
             'prod_picture'=>'required',
             'name'=>'required|max:25',
@@ -71,7 +84,7 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {  
         $user = Auth::user();
         $producto = Producto::find($id);
         return view('compras/compraCreate', compact('producto', 'user')); //Aqui ya es una vista de una compra
@@ -85,6 +98,10 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {   
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Debes ser administrador para acceder a este método");
+        }
+
         $producto = Producto::find($id);
         return view('productos/productosEdit', compact('producto'));
     }
@@ -98,6 +115,10 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Debes ser administrador para acceder a este método");
+        }
+
         $request->validate([
             'prod_picture'=>'required',
             'name'=>'required|max:25',
@@ -125,7 +146,12 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Debes ser administrador para acceder a este método");
+        }
+        
         $producto = Producto::find($id);
+        $producto->users()->detach();
         $producto->delete();
         return redirect('/producto');
     }
