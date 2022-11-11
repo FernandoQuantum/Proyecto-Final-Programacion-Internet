@@ -70,7 +70,7 @@
           </td>
           <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">${{$compra->total}} MXN</td>
           <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{$compra->status}}</td>
-          @if($compra->status == "pendiente")
+          @can('delete', $compra)
 					<td class="border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer">
             <form action = "/compra/{{$compra->id}}" method="POST">
               @csrf
@@ -80,7 +80,7 @@
           </td>
           @else
           <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">Sin acciones disponibles</td>
-          @endif
+          @endcan
 				</tr>
         @endforeach
 

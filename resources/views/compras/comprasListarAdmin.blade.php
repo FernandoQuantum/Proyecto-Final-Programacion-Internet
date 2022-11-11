@@ -71,24 +71,34 @@
             @endif
         </td>
         <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">${{$compra->total}} MXN</td>
-        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">{{$compra->status}}</td>
-		<td class="border-grey-light border p-3 flex justify-between">
+        <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
 
+          @if($compra->deleted_at != NULL)
+              CANCELADA
+          @else
+            {{$compra->status}}
+          @endif
+        </td>
+		    <td class="border-grey-light border p-3 flex justify-between">
+          @if($compra->deleted_at == NULL)
+            @if($compra->status != "entregado")
             <form action = "/compra/{{$compra->id}}" method="POST">
               @csrf
               @method('DELETE')
-              @if($compra->status == "entregado")
-              <input class ="text-yellow-500 cursor-pointer" type="submit" value="Olvidar">
-              @else
               <input class ="text-red-400 cursor-pointer mr-2.5" type="submit" value="Cancelar">
-              @endif
             </form>
+            @endif
 
             @if($compra->status == "pendiente")
             <a href="/status-edit/{{$compra->id}}"><button class="text-green-400">Alistar</button></a>
             @elseif($compra->status == "listo")
             <a href="/status-edit/{{$compra->id}}"><button class="text-blue-800">Entregar</button></a>
+            @elseif($compra->status == "entregado")
+            <a href="/compra/forcedel/{{$compra->id}}"><button class="text-red-600">Olvidar</button></a>
             @endif
+          @else
+            <a href="/compra/forcedel/{{$compra->id}}"><button class="text-red-600">Borrado definitivo</button></a>
+          @endif
 
         </td>
 		</tr>

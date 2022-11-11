@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Compra;
 use App\Models\Team;
 use App\Models\User;
+use App\Policies\CompraPolicy;
 use App\Policies\TeamPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -18,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        Compra::class => CompraPolicy::class
     ];
 
     /**

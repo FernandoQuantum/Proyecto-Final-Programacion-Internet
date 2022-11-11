@@ -37,7 +37,8 @@ class CompraController extends Controller
             if(!Gate::allows('admin-permission')){
                 abort(403,"Debes ser administrador para acceder a este método");
             }
-            $compras = Compra::all();
+            // $compras = Compra::with('user')->get();
+            $compras = Compra::withTrashed()->with('user')->get();
             return view('compras/comprasListarAdmin', compact('user','compras'));
         }
         
@@ -108,6 +109,8 @@ class CompraController extends Controller
     public function destroy($id)
     {
         $compra = Compra::find($id);
+        $this->authorize('delete', $compra);
+
         $compra->delete();
         return redirect("/compra");
     }
@@ -164,5 +167,24 @@ class CompraController extends Controller
         return redirect('/compra');
     }
 
+    public function hardDelete($id_compra){
+
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Acción solo permitida para administrador");
+        }
+
+        $compra = Compra::withTrashed()->where('id',$id_compra);
+        $compra->forceDelete();
+
+        return redirect('/compra');
+    }
+
+    public function apiJSON(){
+
+        if(!Gate::allows('admin-permission')){
+            abort(403,"Acción solo permitida para administrador");
+        }
+        return Compra::all();
+    }
 
 }
