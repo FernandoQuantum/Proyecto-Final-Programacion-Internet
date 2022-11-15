@@ -18,6 +18,7 @@ class CompraController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only('index', 'makeCompra', 'cambiarStatus');
+        $this->middleware('verified')->only('index', 'makeCompra');
     }
     /**
      * Display a listing of the resource.
@@ -179,12 +180,5 @@ class CompraController extends Controller
         return redirect('/compra');
     }
 
-    public function apiJSON(){
-
-        if(!Gate::allows('admin-permission')){
-            abort(403,"Acción solo permitida para administrador");
-        }
-        return Compra::all();
-    }
 
 }

@@ -3,7 +3,6 @@
 use App\Models\Compra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Gate;
 
 
 /*
@@ -22,8 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/comprasJSON', function(){
-    if(!Gate::allows('admin-permission')){
-        abort(403,"Acción solo permitida para administrador");
-    }
+    
     return Compra::all();
+
 });

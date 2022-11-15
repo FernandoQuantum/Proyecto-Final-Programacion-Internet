@@ -28,6 +28,7 @@ Route::get('/', function () {
 
     $user = Auth::user();
     $productos = Producto::all();
+
     return view('pagina_principal', compact('user', 'productos'));
 });
 

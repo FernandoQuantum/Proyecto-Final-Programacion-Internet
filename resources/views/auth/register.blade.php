@@ -6,6 +6,12 @@
 
         <x-jet-validation-errors class="mb-4" />
 
+        <span class="text-green-600">AVISO: Posterior al registro, para realizar una compra se tendrá que validar el usuario
+            en el correo proporcionado.
+        </span>
+        <br>
+        <br>
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
