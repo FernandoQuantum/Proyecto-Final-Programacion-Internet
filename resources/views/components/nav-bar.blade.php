@@ -1,3 +1,4 @@
+
 <nav id="header" class="w-full z-30 top-0 py-1 sticky">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
 
@@ -34,10 +35,6 @@
                 <a href="{{ route('register') }}" class="nav_link inline-block no-underline py-2 px-4">Regístrate</a>
 
                 @else 
-                    @if($user->type == "admin")
-                    <h1>ERES ADMIN BRO!</h1>
-                    @endif
-                    
                 <div class="group inline-block">
                     <button
                         class="outline-none focus:outline-none border px-3 py-1 bg-white rounded-md flex items-center w-30"
@@ -79,4 +76,4 @@
                 </div>
             @endif
         </div>
-    </nav>
+</nav>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotificacionCompra;
 use App\Models\Compra;
 use App\Models\Producto;
 use App\Models\User;
@@ -9,8 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
-
-
+use Illuminate\Support\Facades\Mail;
 
 class CompraController extends Controller
 {
@@ -113,7 +113,7 @@ class CompraController extends Controller
         $this->authorize('delete', $compra);
 
         $compra->delete();
-        return redirect("/compra");
+        return redirect("/compra")->with('info', 'Compra cancelada exitosamente');
     }
 
     
@@ -145,7 +145,7 @@ class CompraController extends Controller
         $compra->amount = $request->amount;
         $compra->save();
 
-
+        Mail::to($user->email)->send(new NotificacionCompra($user, $compra));
         return view('compras/compraConfirmada', compact('producto', 'user', 'total'));
     }
 
@@ -159,13 +159,15 @@ class CompraController extends Controller
 
         if($compra->status == "pendiente"){
             $compra->status = "listo";
+            $compra->save();
+            return redirect('/compra')->with('info','Producto alistado');
         }
         else if($compra->status == "listo"){
             $compra->status = "entregado";
+            $compra->save();
+            return redirect('/compra')->with('info','Producto entregado');
         }
-
-        $compra->save();
-        return redirect('/compra');
+        
     }
 
     public function hardDelete($id_compra){
@@ -177,7 +179,7 @@ class CompraController extends Controller
         $compra = Compra::withTrashed()->where('id',$id_compra);
         $compra->forceDelete();
 
-        return redirect('/compra');
+        return redirect('/compra')->with('info', 'Compra borrada definitivamente');
     }
 
 

@@ -116,13 +116,22 @@
 
         <div class="container mx-auto flex items-start flex-wrap pt-4 pb-12">
 
-            <nav id="store" class="w-full z-30 top-0 px-6 py-1">
-                <div class="w-full container mx-auto flex flex-wrap items-center justify-center mt-0 px-2 py-3">
+            <nav id="store" class="w-full z-30 top-0 px-6 py-1 flex">
+                <div class="w-full container mx-auto flex flex-col items-center justify-center mt-0 px-2 py-3">
 
                     <a class="titulo_subrayado uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " style="font-size:30px;">
                     <i class="fa-solid fa-store"></i>
 				Tienda
 			</a>
+
+            @if(session('info'))
+                <div class="text-center py-4 lg:px-4">
+                    <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+                        <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">Éxito</span>
+                        <span class="font-semibold mr-2 text-left flex-auto">{{session('info')}}</span>
+                    </div>
+                </div>
+            @endif
 
         </div>
             </nav>

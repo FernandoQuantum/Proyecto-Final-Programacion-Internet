@@ -44,7 +44,7 @@ class ProductoController extends Controller
         if(!Gate::allows('admin-permission')){
             abort(403,"Debes ser administrador para acceder a este método");
         }
-
+        
         return view('productos/productosCreate');
     }
 
@@ -76,7 +76,9 @@ class ProductoController extends Controller
         $producto->hours = $request->hours;
         $producto->save();
 
-        return redirect('/producto');
+        return redirect('/producto')->with('info','Producto agregado con éxito!');
+
+        // return redirect('/producto');
     }
 
     /**
@@ -137,7 +139,8 @@ class ProductoController extends Controller
         $producto->hours = $request->hours;
         $producto->save();
 
-        return redirect('/producto');
+        // return redirect('/producto');
+        return redirect('/producto')->with('info','Producto actualizado con éxito!');
     }
 
     /**
@@ -155,6 +158,8 @@ class ProductoController extends Controller
         $producto = Producto::find($id);
         $producto->users()->detach();
         $producto->delete();
-        return redirect('/producto');
+
+        return redirect('/producto')->with('info','Producto eliminado con éxito!');
+        // return redirect('/producto');
     }
 }
