@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Foto;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -61,22 +63,37 @@ class ProductoController extends Controller
         }
 
         $request->validate([
-            'prod_picture'=>'required',
+            'prod_picture'=>'required|image',
             'name'=>'required|max:25',
             'price'=>'required',
             'desc'=>'required|max:80',
             'hours'=>'required'
         ]);
 
-        $producto = new Producto;
-        $producto->name = $request->name;
-        $producto->prod_picture = $request->prod_picture;
-        $producto->price = $request->price;
-        $producto->desc = $request->desc;
-        $producto->hours = $request->hours;
-        $producto->save();
+        if($request->file('prod_picture')->isValid()){
 
-        return redirect('/producto')->with('info','Producto agregado con éxito!');
+            $producto = new Producto;
+            $producto->name = $request->name;
+            $producto->price = $request->price;
+            $producto->desc = $request->desc;
+            $producto->hours = $request->hours;
+            $producto->save();
+
+            $ubicacion = $request->prod_picture->store('public');
+            $archivo = new Foto();
+            $archivo->producto_id = $producto->id;
+            $archivo->ubicacion = $ubicacion;
+            $archivo->nombre_original = $request->prod_picture->getClientOriginalName();
+            $archivo->mime = "";
+            $archivo->save();
+
+            return redirect('/producto')->with('info','Producto agregado con éxito!');
+
+        }
+        else{
+            return redirect('/producto')->with('error','Error en la carga de la imagen');
+        }
+
 
         // return redirect('/producto');
     }
@@ -124,23 +141,39 @@ class ProductoController extends Controller
         }
 
         $request->validate([
-            'prod_picture'=>'required',
+            'prod_picture'=>'required|image',
             'name'=>'required|max:25',
             'price'=>'required',
             'desc'=>'required|max:80',
             'hours'=>'required'
         ]);
 
-        $producto = Producto::find($id);
-        $producto->name = $request->name;
-        $producto->prod_picture = $request->prod_picture;
-        $producto->price = $request->price;
-        $producto->desc = $request->desc;
-        $producto->hours = $request->hours;
-        $producto->save();
+        if($request->file('prod_picture')->isValid()){
 
-        // return redirect('/producto');
-        return redirect('/producto')->with('info','Producto actualizado con éxito!');
+            $producto = Producto::find($id);
+            $producto->name = $request->name;
+            $producto->price = $request->price;
+            $producto->desc = $request->desc;
+            $producto->hours = $request->hours;
+            $producto->save();
+
+            DB::table('fotos')->where('ubicacion',$producto->foto->ubicacion)->delete(); //Eliminamos la foto del producto de la BD de fotos
+            Storage::delete($producto->foto->ubicacion); //Eliminamos foto del storage 
+
+            $ubicacion = $request->prod_picture->store('public');
+            $archivo = new Foto();
+            $archivo->producto_id = $producto->id;
+            $archivo->ubicacion = $ubicacion;
+            $archivo->nombre_original = $request->prod_picture->getClientOriginalName();
+            $archivo->mime = "";
+            $archivo->save();
+            // return redirect('/producto');
+            return redirect('/producto')->with('info','Producto actualizado con éxito!');
+        }
+        else {
+            return redirect('/producto')->with('error','Error en la carga de la imagen');
+        }
+        
     }
 
     /**
@@ -156,10 +189,11 @@ class ProductoController extends Controller
         }
         
         $producto = Producto::find($id);
-        $producto->users()->detach();
-        $producto->delete();
+        $producto->users()->detach(); //Eliminamos los registros en la tabla pivote que esten relacionados con este producto
+        DB::table('fotos')->where('ubicacion',$producto->foto->ubicacion)->delete(); //Eliminamos la foto del producto de la BD de fotos
+        Storage::delete($producto->foto->ubicacion); //Eliminamos foto del storage 
+        $producto->delete(); //Ahora si, eliminamos producto
 
         return redirect('/producto')->with('info','Producto eliminado con éxito!');
-        // return redirect('/producto');
     }
 }

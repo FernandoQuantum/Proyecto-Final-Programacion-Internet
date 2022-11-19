@@ -33,6 +33,15 @@
     </div>
     @endif
 
+    @if(session('error'))
+    <div class="bg-white text-center py-4 lg:px-4">
+        <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+            <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">Éxito</span>
+            <span class="font-semibold mr-2 text-left flex-auto">{{session('error')}}</span>
+        </div>
+    </div>
+    @endif
+
     <section class="bg-white">
 
         <div class="container mx-auto flex items-start flex-wrap pt-4 pb-12">
@@ -53,7 +62,7 @@
             @foreach($productos as $producto)
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <div>
-                    <img class="producto hover:grow hover:shadow-lg" src="img/{{$producto->prod_picture}}">
+                    <img class="producto hover:grow hover:shadow-lg" src="{{Storage::url($producto->foto->ubicacion)}}">
                     <div class="pt-3 flex items-center justify-between">
                         <p class="font-bold">{{$producto->name}}</p>
                         <p class="pt-1 text-green-900 font-bold">${{$producto->price}}</p>

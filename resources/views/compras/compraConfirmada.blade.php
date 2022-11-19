@@ -25,7 +25,7 @@
     <section class="flex justify-center p-6">
 
         <div id = "container_compra">
-            <img class="hover:grow hover:shadow-lg" style="width: 50%; height:auto;" src="/img/{{$producto->prod_picture}}">
+            <img class="hover:grow hover:shadow-lg" style="width: 50%; height:auto;" src="{{Storage::url($producto->foto->ubicacion)}}">
             <div id="desc_compra" class="text-lg">
         
                 <h1 style="font-size: 22px;" class="self-center font-bold">Resumen de compra</h1>

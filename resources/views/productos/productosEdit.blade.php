@@ -39,7 +39,7 @@
         <p id="description"><em>Sustituya los campos que desee modificar</em></p>
     </header>
 
-    <form id="survey-form" action="/producto/{{$producto->id}}" method="POST">
+    <form id="survey-form" action="/producto/{{$producto->id}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 
@@ -54,10 +54,10 @@
         </div>
         @endif
         
-        <img class ="self-center" src="/img/{{$producto->prod_picture}}" alt="Donde está la imagen??">
+        <img class ="self-center" src="{{Storage::url($producto->foto->ubicacion)}}" alt="Donde está la imagen??">
 
         <label class="mt-5" for="picture">Seleccione imagen</label>
-        <input id = "picture" type="file" name="prod_picture" required>
+        <input id = "picture" type="file" name="prod_picture" accept="image/jpeg,image/jpg,image/png" required>
         
         <label class ="mt-5" for="name">Cambiar nombre</label>
         <input id = "name" type="text" placeholder="Nombre producto" name="name" required value="{{$producto->name}}">

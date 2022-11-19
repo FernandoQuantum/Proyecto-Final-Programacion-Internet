@@ -32,7 +32,7 @@
         <p id="description"><em>Llene la info del nuevo producto</em></p>
     </header>
 
-    <form id="survey-form" action="/producto" method="POST">
+    <form id="survey-form" action="/producto" method="POST" enctype="multipart/form-data">
 
         @if($errors->any())
             <div>
@@ -47,7 +47,7 @@
 
         @csrf
         <label class="mt-5" for="picture">Imagen del nuevo producto</label>
-        <input id = "picture" type="file" name="prod_picture" required>
+        <input id = "picture" type="file" accept="image/jpeg,image/png,image/jpg" name="prod_picture" required>
         
         <label class ="mt-5" for="name">Nombre</label>
         <input id = "name" type="text" placeholder="Nombre producto" name="name" required value="{{old('name')}}">

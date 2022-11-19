@@ -35,11 +35,11 @@ Route::get('/', function () {
 
 Route::resource('producto', ProductoController::class);
 Route::resource('compra', CompraController::class);
-
-Route::post('/compra/make/{producto_id}', [CompraController::class, 'makeCompra']);
-Route::get('/usuario/{user_id}', [UserController::class, 'info']);
 Route::get('/status-edit/{compra_id}', [CompraController::class, 'cambiarStatus']);
 Route::get('/compra/forcedel/{compra_id}', [CompraController::class, 'hardDelete']);
+Route::post('/compra/make/{producto_id}', [CompraController::class, 'makeCompra']);
+Route::get('/usuario/{user_id}', [UserController::class, 'info']);
+
 
 Route::middleware([
     'auth:sanctum',

@@ -139,7 +139,7 @@
             @foreach($productos as $producto)
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <div>
-                    <img class="producto hover:grow hover:shadow-lg" src="img/{{$producto->prod_picture}}">
+                    <img class="producto hover:grow hover:shadow-lg" src="{{Storage::url($producto->foto->ubicacion)}}">
                     <div class="pt-3 flex items-center justify-between">
                         <p class="font-bold">{{$producto->name}}</p>
                         <p class="pt-1 text-green-900 font-bold">${{$producto->price}}</p>

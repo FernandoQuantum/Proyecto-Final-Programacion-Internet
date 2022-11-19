@@ -14,5 +14,9 @@ class Producto extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function foto(){
+        return $this->hasOne(Foto::class);
+    }
 }
 
