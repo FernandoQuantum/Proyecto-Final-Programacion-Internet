@@ -42,14 +42,7 @@
 
   <h1 class="text-teal-500" style="margin-top: 35px; font-size:28px;">Resumen de tus compras</h1>
 
-  @if(session('info'))
-    <div class="text-center py-4 lg:px-4">
-        <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
-            <span class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">Éxito</span>
-            <span class="font-semibold mr-2 text-left flex-auto">{{session('info')}}</span>
-        </div>
-    </div>
-  @endif
+  <x-session-message/>
 
 	<div class="container">
 		<table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
