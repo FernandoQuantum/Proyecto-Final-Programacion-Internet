@@ -30,7 +30,7 @@ Route::get('/', function () {
     $productos = Producto::all();
 
     return view('pagina_principal', compact('user', 'productos'));
-});
+})->name('pagina_principal');
 
 
 Route::resource('producto', ProductoController::class);
