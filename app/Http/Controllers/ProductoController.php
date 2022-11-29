@@ -65,7 +65,7 @@ class ProductoController extends Controller
         $request->validate([
             'prod_picture'=>'required|image',
             'name'=>'required|max:25',
-            'price'=>'required',
+            'price'=>'required|numeric|gt:0',
             'desc'=>'required|max:80',
             'hours'=>'required'
         ]);

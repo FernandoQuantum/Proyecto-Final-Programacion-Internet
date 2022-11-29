@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/landingcss.css">
 
+
 </head>
 
 <body class="bg-white text-gray-600 work-sans leading-normal text-base tracking-normal">
@@ -42,7 +43,7 @@
                 <p class="text-justify"><b>Descripción:</b> {{$producto->desc}}</p>
                 <p><b>Listo en:</b> {{$producto->hours}} hora(s).</p>
 
-                <form class="formulario_compra" action="/compra/make/{{$producto->id}}" method="POST">
+                <form class="formulario_prevent" action="/compra/make/{{$producto->id}}" method="POST">
                     @csrf
                     <label for="cantidad">Seleccione la cantidad</label>
                     <input id="cantidad" name="amount" type="number" required>
@@ -53,12 +54,15 @@
                         <option value=0>Recoger en tienda</option>
                     </select>
 
-                    <input class="buy" style="width: 200px; margin-top:20px;" type="submit" value="Confirmar compra">
+                    <input class="buy submit-prevent-button" style="width: 200px; margin-top:20px;" type="submit" value="Confirmar compra">
                 </form>
                 
             </div>
         </div>
     </section>
+
+    <script src = "/js/submit.js"></script>
+
 </body>
 
 </html>

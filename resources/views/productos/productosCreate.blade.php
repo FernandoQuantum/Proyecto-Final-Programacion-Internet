@@ -32,7 +32,7 @@
         <p id="description"><em>Llene la info del nuevo producto</em></p>
     </header>
 
-    <form id="survey-form" action="/producto" method="POST" enctype="multipart/form-data">
+    <form id="survey-form" class = "formulario_prevent" action="/producto" method="POST" enctype="multipart/form-data">
 
         @if($errors->any())
             <div>
@@ -61,7 +61,9 @@
         <label class ="mt-5" for="name">Horas</label>
         <input id = "name" type="number" placeholder="1" name="hours" required value="{{old('hours')}}">
 
-        <input id="submit" type="submit" value="Crear producto">
+        <input id="submit" type="submit" value="Crear producto" class="submit-prevent-button">
     </form>
+
+    <script src="/js/submit.js"></script>
 </body>
 </html>
